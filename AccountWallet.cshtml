@@ -1,0 +1,113 @@
+﻿@{
+	ViewBag.Title = "AccountWallet";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row">
+      <div class="col-sm-8 p-5">
+    <form action="" method="post" class="border">
+      <div class="card border-0">
+		  <div class="card-header">
+		  <div class="row">
+     			 <div class="col-sm-6">
+     			 		  		        <h1 style="font-size:2vw;" class="font-weight-light ">Balance</h1>
+     			 </div>
+     			  <div class="col-sm-6">
+     			  		        <h1 style="font-size:5vw;" class="font-weight-light">P20,000</h1>
+     			 </div>
+     	   </div>
+          </div>
+     </form>
+		  <div class="card-body">
+		  
+		  <div class="input-group input-group-lg">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text font-weight-light">#</span>
+		    </div>
+		    <input type="text" class="form-control" placeholder="0da110887844392d2663d5fabaca9eef">
+		  </div>
+		  
+		  </div>
+		  <div class="card-footer">
+  			<button type="button" class="btn btn-primary btn-block">Submit</button>
+		  </div>
+		  
+	 </div>	      
+    </div>
+      
+      <div class="col-sm-4 p-5">
+      <form action="" method="post" class="border">
+	      <div class="card border-0">
+			  <div class="card-header">
+				    <div class="input-group mb-3">
+					    <div class="input-group-prepend">
+					      <span class="input-group-text">Value</span>
+					    </div>
+			        	  <input type="text"  
+			        	  class="form-control" placeholder="0.00" 
+			        	  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" 
+			        	  maxlength="20"
+			        	  name="convertInput"/>
+					  </div>
+
+			          <select name="currency" class="custom-select" id="scripts">
+  					    <option selected>Convert to</option>
+							@foreach(string cur in ViewBag.Currencies as String[]){
+							<option title="@cur" value="@cur">@cur</option>
+							}
+					  </select>
+			  </div>
+			  
+			  <div class="card-body">
+			   	<h1 class=" font-weight-light text-right">0.00</h1></div>
+			  </div>
+			  <div class="card-body">
+			    	<div class="card-title">
+					<div class="input-group mb-3 input-group-sm">
+					    <div class="input-group-prepend">
+					       <span class="input-group-text">CT</span>
+					    </div>
+			  	         <input type="text" class="custom-select"  name="display" id="display" disabled/>
+					 </div>  	 
+					<div class="card-title">
+					<div class="input-group mb-3 input-group-sm">
+					    <div class="input-group-prepend">
+					       <span class="input-group-text">VL</span>
+					    </div>
+			  	         <input type="text" class="custom-select"  name="display" id="display" disabled/>
+					 </div>  	     					 
+			  	</div>
+			  </div>
+			  <div class="card-footer">
+			  	 <button type="button" class="btn btn-primary btn-block" id="showTxt" value="selectedIndex/Text">Convert</button>
+			  </div>
+			 
+		</div>
+	</form>
+    </div>
+    <script>
+        var sel = document.getElementById('scripts');
+    	var opt = sel.options[sel.selectedIndex];
+	    function getSelectedOption(sel) {
+	    var opt;
+	    for ( var i = 0, len = sel.options.length; i < len; i++ ) {
+	            opt = sel.options[i];
+	            if ( opt.selected === true ) {
+	                break;
+	            }
+	        }
+	        return opt;
+	    }
+        (function() {
+		       var el = document.getElementById('display');
+			       document.getElementById('showTxt').onclick = function () {
+	            // access text property of selected option
+	           	   el.value = sel.options[sel.selectedIndex].text;
+	        	}
+			        document.getElementById('doLoop').onclick = function () {
+		            var opt = getSelectedOption(sel);
+		            el.value = opt.value;
+	        	}
+    	 }());
+
+	</script>
